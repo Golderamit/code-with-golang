@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>answerdetails</title>
+</head>
+<body>
+    
+    <a href="/get/question/">back to question list</a> | 
+    <a href="/get/question/{{.QuestionTitle.ID}}/">back to the question</a>
+    <p>Add Answer </p>
+    <h2>Q: {{.createQuestionDetails.QuestionTitle}}</h2>
+    <form action="/question/create/answer/{{.createQuestionDetails.ID}}/" method="post">
+        {{.CSRFField}}
+        <label for="AnswerDetails">Answer</label>
+        <input type="text" name="AnswerDetails" id="" value="{{.Form.AnswerDetails}}">
+        {{with .FormErrors.AnswerDetails}}
+            <p>{{.}}</p>
+        {{end}}
+
+        <input type="submit" value="Add">
+    </form>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="/static/css/app.min.css" />
+</head>
+  <h2 style="text-align: center;">You must be logged in to give your answer on Q&A</h2>
+  
+  
+  <div id="form-wrapper" style="max-width:250px;margin:auto;">
+
+<p> Sign up below or  <a href="/login/" class="text-blue-800 py-3 px-3">  log in </a></p>
+
+
+<p>Please insert all Information</p>
+
+
+<form   action="/user/login/"  method="post">
+  {{.CSRFField}}
+  <div>
+    <label for="FirstName">First Name:</label>
+    <input type="text" name="FirstName" id="" value="{{.Form.Name}}">
+     {{with .FormErrors.FirstName}}
+            <p>{{.}}</p>
+           {{end}} 
+  </div>
+
+    <div>
+    <label for="LastName">LastName:</label>
+    <input type="text" name="LastName" id="" value="{{.Form.Name}}">
+   {{with .FormErrors.LastName}}
+            <p>{{.}}</p>
+           {{end}} 
+
+   </div>
+
+  <div>
+    <label for="Username">Username:</label>
+    <input type="text" name="Username"id="" value="{{.Form.Username}}">
+   {{with .FormErrors.Username}}
+            <p>{{.}}</p>
+           {{end}} 
+    </div>
+
+    <div>
+    <label for="Email">Email:</label>
+    <input type="text"  name="Email"value="{{.Form.Email}}" >
+   {{with .FormErrors.Email}}
+            <p>{{.}}</p>
+           {{end}} 
+    </div>
+
+       <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align"> Password<span class="required">*</span></label>
+                <div class="col-md-6 col-sm-6 ">
+                  <input type="password" name="Password" id="password" required="" onkeyup='check();' minlength="6" class="form-control" value="{{.Form.Password}}"  >
+                </div>
+                {{with .FormErrors.Password}}
+                    <p>{{.}}</p>
+                {{end}} 
+              </div>
+
+        <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align">Retype Password<span class="required">*</span></label>
+        <div class="col-md-6 col-sm-6 ">
+                  <input type="password" name="retype_password" id="retype_password" required="" onkeyup='check();'  minlength="6"class="form-control" value="{{.Form.Password}}">
+        </div>
+
+        
+    <input  type="submit" value="Sign Up">
+        
+
+</form> 
+
+<script>
+var password = document.getElementById("password")
+  , retype_password = document.getElementById("retype_password");
+
+function validatePassword(){
+  if(password.value != retype_password.value) {
+    retype_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    retype_password.setCustomValidity('');
+  }
+}
+password.onchange = validatePassword;
+retype_password.onkeyup = validatePassword;
+</script>
+</div>
+</body>
+</html>

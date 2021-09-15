@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Home</title>
+   
+    <link rel="stylesheet" href="/static/css/app.min.css" />
+
+    <style>
+      
+      .center{
+        width: 20px;
+      }
+      .container{
+        display: flex;
+        justify-content: center;
+        max-width: 2400px;
+      }
+      h1 {
+        position: absolute;
+        font-size: 35px;
+        top: 75px;
+        left: 530px;
+      }
+      h2 {
+	       position: absolute;
+	       font-size: 30px;
+	       top: 150px;
+	       left: 530px;
+	       right: 520px;
+         }
+      .btn {
+          border: 2px solid black;
+          background-color: white;
+          color: black;
+          padding: 14px 28px;
+          font-size: 16px;
+           cursor: pointer;
+           }
+      .s {
+          border-color: #04AA6D;
+           color: green;
+          }
+
+      .s:hover {
+           background-color: #04AA6D;
+           color: white;
+            }
+        
+
+        
+        
+      </style>
+  </head>
+  <body>
+     <div class="container">
+    <div class="center" style="border: 2px solid black;background-color:skyblue;padding:200px;width:1200px;">
+    <h1 class="text-blue-700 text-center font-bold">Welcome to Question and Answer Application</h1>
+    <h2 class="text-yellow-500 text-center font-bold">Join the Q&A community </h2>
+      {{if .UserLogIn}}
+
+      <p>welcome to Q&A :::You're successfully  logged in</p>
+      <div >
+          <p class=" text-green-700 text-center font-extrabold"> Anybody can   <a href="/question/create/" class=" py-3 px-3"> ASK Question</a></p>
+      </div>
+      <div class="">
+        <p> Anybody can give <button class="btn s " ><a href="/user/login/">  Answer</a></button> </p>
+      </div>
+      <div>
+         <p class="text-center"> Best Question  <a href="/get/question/" class=" py-3 px-3"> List</a> </p>
+      </div>
+      <button> <a href="/logout/"> Logout </a> </button>
+      {{else}}
+       <p>
+        <button> <a href="/login/"> Login </a></button> 
+        <button> <a href="/user/login/"> Signup </a> </button>
+      </p>
+  </div>
+  </div>
+
+      {{end}}
+  </body>
+</html>

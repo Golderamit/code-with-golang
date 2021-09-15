@@ -1,0 +1,10 @@
+<h1>Codemen Official</h1>
+<div>
+    {{.SignatureCount}} total signatures-
+    <a href="/codemen/new">Give your identity</a>
+    </div>
+  <div>
+      {{range.Signatures}}
+      <p> {{.}}</p>
+      {{end}}
+    </div>

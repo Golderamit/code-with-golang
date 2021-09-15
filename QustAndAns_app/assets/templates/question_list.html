@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuestionDetails</title>
+</head>
+<body>
+    
+    <table>
+        <tr>
+          <th>ID</th>
+          <th>Question</th>
+          <th>Created Time</th>
+          <th>Updated Time</th>
+        </tr>
+        {{range .Question}}
+        <tr>
+          <td>{{.ID}}</td>
+          <td><a href="/get/question/{{.ID}}/">{{.QuestionTitle}}</a></td>
+          
+        </tr>
+        {{end}}
+      </table>
+</body>
+</html>
