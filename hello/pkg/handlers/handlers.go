@@ -1,7 +1,9 @@
-package main
+package handlers
 
 import (
 	"net/http"
+
+	"github.com/Golderamit/code-with-golang/pkg/render"
 )
 
 
@@ -9,13 +11,13 @@ import (
 
 func Home(w http.ResponseWriter, r *http.Request){
 	/* fmt.Fprintf(w,"this is the home page ") */
-	renderTemplate(w,"home-page.html")
+	render.RenderTemplate(w,"home-page.html")
 
 }
 func About(w http.ResponseWriter, r *http.Request){
 	/* sum:=AddValues(2,2)
 	fmt.Fprintf(w,fmt.Sprintf("this is about page and addvalues for 2+2 is %d",sum)) */
-	renderTemplate(w,"about-page.html")
+	render.RenderTemplate(w,"about-page.html")
 }
 /* func AddValues(x,y int) int {
 	var sum int
