@@ -26,10 +26,10 @@ func RenderTemplate(w http.ResponseWriter, tmpl string){
   return 
 } 
 
-func RenderTemplateRun(w http.ResponseWriter) (map[string]*template.Template, error){
-	myCashe := map[string]*template.Template{}
+func RenderTemplateRun(w http.ResponseWriter) (map[string]*template.Template, error) {
+	 myCashe := map[string]*template.Template{}
 
-      pages, err := filepath.Glob("./templates/*.page.html")
+       pages, err := filepath.Glob("./templates/*.page.html")
 	    if  err != nil {
 		   return myCashe,err
 	}
@@ -42,12 +42,12 @@ func RenderTemplateRun(w http.ResponseWriter) (map[string]*template.Template, er
 	  ts, err :=template.New(name).Funcs(functions).ParseFiles(page)
 	  if  err != nil {
 		return myCashe,err
-	}
+	   }
 
 	matches, err :=filepath.Glob("./templates/*.layout.html")
 	if  err != nil {
 		return myCashe,err
-	}
+	  }
 	if lens(matches) > 0{
 		ts, err := ts.ParseGlob("./templates/*.layout.html")
 		if  err != nil {
@@ -56,4 +56,4 @@ func RenderTemplateRun(w http.ResponseWriter) (map[string]*template.Template, er
 		myCashe[name] = ts
 	}
 	return myCashe,nil
-}
+ }
