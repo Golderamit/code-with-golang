@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"path/filepath"
-	"text/template"
+	"html/template"
 
 	"google.golang.org/genproto/googleapis/cloud/functions/v1"
 )
@@ -18,8 +18,8 @@ func RenderTemplate(w http.ResponseWriter, tmpl string){
 	  if err != nil{
 		  fmt.Println("error in getting template cache:",err)
 	  }
-	ParsedTemplate,_ :=template.ParseFiles("./assets/templates/"+tmpl)
-	err :=ParsedTemplate.Execute(w,nil)
+	ParsedTemplate,_ :=template.ParseFiles("./assets/templates/" + tmpl)
+	err := ParsedTemplate.Execute(w, nil)
 	if err != nil{
 		fmt.Println("error when parsing template ",err)
 	}
@@ -32,24 +32,24 @@ func RenderTemplateRun(w http.ResponseWriter) (map[string]*template.Template, er
        pages, err := filepath.Glob("./templates/*.page.html")
 	    if  err != nil {
 		   return myCashe,err
-	}
+	    }
 
 	for _, page := range pages {
 		name := filepath.Base(page)
 
 		fmt.Println("page is currently",page)
 
-	  ts, err :=template.New(name).Funcs(functions).ParseFiles(page)
+	  ts, err := template.New(name).Funcs(functions).ParseFiles(page)
 	  if  err != nil {
 		return myCashe,err
 	   }
 
-	matches, err :=filepath.Glob("./templates/*.layout.html")
+	matches, err := filepath.Glob("./templates/*.layout.html")
 	if  err != nil {
 		return myCashe,err
 	  }
-	if lens(matches) > 0{
-		ts, err := ts.ParseGlob("./templates/*.layout.html")
+	if len(matches) > 0 {
+		ts, err = ts.ParseGlob("./templates/*.layout.html")
 		if  err != nil {
 			return myCashe,err
 		}
