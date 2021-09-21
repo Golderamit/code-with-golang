@@ -13,17 +13,17 @@ var functions = template.FuncMap{
 
 }
 
-func RenderTemplate(w http.ResponseWriter, tmpl string){
-	_,err :=RenderTemplateRun(w)
-	  if err != nil{
+func RenderTemplate(w http.ResponseWriter, tmpl string) {
+	_, err := RenderTemplateRun(w)
+	  if err != nil {
 		  fmt.Println("error in getting template cache:",err)
 	  }
-	ParsedTemplate,_ :=template.ParseFiles("./assets/templates/" + tmpl)
-	err := ParsedTemplate.Execute(w, nil)
+	ParsedTemplate,_ := template.ParseFiles("./assets/templates/" + tmpl)
+	err = ParsedTemplate.Execute(w, nil)
 	if err != nil{
 		fmt.Println("error when parsing template ",err)
+		return
 	}
-  return 
 } 
 
 func RenderTemplateRun(w http.ResponseWriter) (map[string]*template.Template, error) {
@@ -31,7 +31,7 @@ func RenderTemplateRun(w http.ResponseWriter) (map[string]*template.Template, er
 
        pages, err := filepath.Glob("./templates/*.page.html")
 	    if  err != nil {
-		   return myCashe,err
+		   return myCashe, err
 	    }
 
 	for _, page := range pages {
