@@ -1,12 +1,12 @@
 package render
 
 import (
+	"bytes"
 	"fmt"
+	"html/template"
+	"log"
 	"net/http"
 	"path/filepath"
-	"html/template"
-
-	"google.golang.org/genproto/googleapis/cloud/functions/v1"
 )
 
 var functions = template.FuncMap{
@@ -14,19 +14,27 @@ var functions = template.FuncMap{
 }
 
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
-	_, err := RenderTemplateRun(w)
-	  if err != nil {
-		  fmt.Println("error in getting template cache:",err)
-	  }
-	ParsedTemplate,_ := template.ParseFiles("./assets/templates/" + tmpl)
-	err = ParsedTemplate.Execute(w, nil)
-	if err != nil{
-		fmt.Println("error when parsing template ",err)
-		return
-	}
-} 
 
-func RenderTemplateRun(w http.ResponseWriter) (map[string]*template.Template, error) {
+	tc ,err := CreateTemplateCache()
+	 if err != nil {
+		 log.Fatal(err)
+	 }
+	  t,ok := tc[tmpl]
+        if !ok {
+			log.Fatal(err)
+		}
+
+	 buf := new(bytes.Buffer)
+
+	 _ = t.Execute(buf,nil)
+
+	 _,err =buf.WriteTo(w)
+	   if err != nil {
+		   fmt.Println("error writing template to browser",err)
+	   }
+} 
+/* CreateTemplateCache create a cache as a map */
+func CreateTemplateCache ()  (map[string]*template.Template, error) {
 	 myCashe := map[string]*template.Template{}
 
        pages, err := filepath.Glob("./templates/*.page.html")
@@ -57,3 +65,5 @@ func RenderTemplateRun(w http.ResponseWriter) (map[string]*template.Template, er
 	}
 	return myCashe,nil
  }
+   return myCashe ,nil
+}
